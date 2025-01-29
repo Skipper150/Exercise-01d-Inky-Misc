@@ -7,32 +7,46 @@ This exercise will demonstrate the following in the example video:
  - Functions
  
  In the assignment:
- - A story with at least 6 knots
- - Vary some text via a loop
- - Create a function that serves as a timer. (This is shown in the video)
+ * A story with at least 6 knots
+ * Vary some text via a loop
+ * Create a function that serves as a timer. (This is shown in the video)
 */
 
 
-VAR time = 0 //  0 Morning, 1 Noon, 2 Night
+VAR time = -1 //  0 Morning, 1 Noon, 2 Night
+VAR Shells = 0
 
 
 
+-> intro
 
+== intro ==
+Your ship sank while out at sea. You managed to swim to a nearby island and construct a shelter.
 -> seashore
+
 
 == seashore ==
 You are sitting on the beach. 
-
+It is {advance_time()}
++[Stroll down the beach] -> beach2
 + [Wait] -> seashore
++{time == 2} [Go to sleep] -> Sleep
 -> DONE
+
+== Sleep ==
+You lie down in your tent and go to sleep
+-> seashore
+
 
 == beach2 ==
 This is further down the beach.
-
-+ [Move back up the beach] -> seashore
+It is {advance_time()}
++{time == 1} [pick up seashells] -> shells
++[Stroll back up the beach] -> seashore
 
 == shells ==
 You pick up the shells
+~Shells = Shells + 1
 -> beach2
 
 == function advance_time ==
@@ -43,7 +57,7 @@ You pick up the shells
         - time > 2:
             ~ time = 0
     }    
-    /*
+    
     {    
         - time == 0:
             ~ return "Morning"
@@ -55,10 +69,8 @@ You pick up the shells
             ~ return "Night"
     
     }
-    */
+    
     
         
     ~ return time
-    
-    
     
